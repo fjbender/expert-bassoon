@@ -31,8 +31,8 @@ require __DIR__ . '/../src/middleware.php';
 // Register routes
 require __DIR__ . '/../src/routes.php';
 
-$app->get('/v1/invoice/{jsonp}', function (Request $request, Response $response) {
-    $jsonp = $request->getAttribute('jsonp');
+$app->get('/v1/invoice/', function (Request $request, Response $response) {
+    $jsonp = $request->getQueryParams()['callback'];
 
     $parameters = array(
         "request" => "authorization",
