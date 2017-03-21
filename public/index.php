@@ -83,11 +83,11 @@ $app->get('/v1/invoice/{jsonp}', function (Request $request, Response $response)
         'de[3]' => 'Gutschein %',
         'it[3]' => 'voucher',
         'id[3]' => 'GUT100',
-        'pr[3]' => '-100',
+        'pr[3]' => '-1000',
         'no[3]' => '1',
         'va[3]' => '19',
     );
-    $p1request = array_merge($defaults, $parameters, $personalData, $shippingData, $articles);
+    $p1request = array_merge($parameters, $personalData, $shippingData, $articles);
     try {
         $p1response = Payone::doCurl($p1request);
         $response->getBody()->write($jsonp . "(" . json_encode($p1response) . ")");

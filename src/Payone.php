@@ -32,10 +32,9 @@ class Payone {
     public static function doCurl($request)
     {
         $credentials = new Credentials();
-        $request = array_merge($request, $credentials->getCredentials());
         $client = new \GuzzleHttp\Client(['verify' => false ]);
 
-        if (($response = $client->request('POST', self::PAYONE_SERVER_API_URL, ['form_params' => $request])) instanceof \Psr\Http\Message\ResponseInterface) {
+        if (($response = $client->request('POST', self::PAYONE_SERVER_API_URL, ['form_params' => array_merge($request, $credentials->getCredentials())])) instanceof \Psr\Http\Message\ResponseInterface) {
             $return = self::parseResponse($response);
         } else {
             throw new \Exception('Something went wrong during the HTTP request.');
